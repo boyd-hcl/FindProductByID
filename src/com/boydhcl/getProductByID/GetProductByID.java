@@ -45,18 +45,18 @@ public class GetProductByID extends HttpServlet {
 		try {
 			DBConnector db = new DBConnector("jdbc:mysql://localhost:3306", "root", "");
 			Statement stmt = db.getConnection().createStatement();
-			out.print("Search performed. Matches listed below.<br>");
 			ResultSet resultSet = stmt.executeQuery(""
 					+"SELECT * FROM products.products "
 					+"WHERE product_id = " + product_id + ";");
 			if(resultSet.next()) {
+				out.print("Search performed. Matches listed below.<br>");
 				out.print("<br>Your search returned a result:");
 				out.println("<table><tr><th>Product ID</th><th>Product Name</th><th>Price</th><tr>");
 				out.print("<tr><td>"+ resultSet.getString("product_id")+ "</td><td>" + resultSet.getString("name")+ "</td><td>" + resultSet.getString("price") + "</td><tr></table>");
 				
 			}
 			else {
-				out.print("<br>Your search did not return any results.");
+				out.print("<h1>:(</h1><br>Your search did not return any results.");
 			}
 		}
 		catch(Exception e) {
